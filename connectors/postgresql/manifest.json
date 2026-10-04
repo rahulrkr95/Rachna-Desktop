@@ -1,0 +1,31 @@
+{
+  "id": "postgresql",
+  "name": "PostgreSQL",
+  "description": "Query a Postgres database via the official Postgres MCP server.",
+  "version": "1.0.0",
+  "icon": "postgresql",
+  "vendor": "PostgreSQL",
+  "auth": {
+    "type": "api-key",
+    "fields": [
+      { "key": "connectionString", "label": "Connection string", "secret": true, "placeholder": "postgres://user:pass@host:5432/db" }
+    ],
+    "instructions": "Enter a Postgres connection string with read access to the database you want the AI to query.",
+    "helpUrl": "https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING"
+  },
+  "transport": {
+    "kind": "mcp-stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-postgres"],
+    "envFromAuth": ["POSTGRES_CONNECTION_STRING"]
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read database schema",
+    "Run read queries against the connected database"
+  ]
+}

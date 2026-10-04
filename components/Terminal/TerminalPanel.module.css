@@ -1,0 +1,25 @@
+/* components/Terminal/TerminalPanel.module.css */
+
+.terminalContainer {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-base);
+  padding: 6px 8px 4px;
+  box-sizing: border-box;
+}
+
+/* Make xterm.js fill the container cleanly */
+.terminalContainer :global(.xterm) {
+  height: 100%;
+}
+
+.terminalContainer :global(.xterm-viewport) {
+  background-color: transparent !important;
+}
+
+.terminalContainer :global(.xterm-screen) {
+  /* Prevent layout quirks when the panel resizes */
+  width: 100% !important;
+}

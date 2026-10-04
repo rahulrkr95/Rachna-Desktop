@@ -1,0 +1,41 @@
+{
+  "name": "@rachna-ai-studio/reposcanner",
+  "version": "2.0.0",
+  "description": "TypeScript repo scanner + dependency graph engine for Rachna IDE",
+  "main": "dist/repoScanner/index.js",
+  "types": "dist/repoScanner/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/repoScanner/index.js",
+      "types": "./dist/repoScanner/index.d.ts"
+    },
+    "./dependencyGraph": {
+      "require": "./dist/dependencyGraph/index.js",
+      "types": "./dist/dependencyGraph/index.d.ts"
+    },
+    "./repoAnalysis": {
+      "require": "./dist/repoAnalysis.js",
+      "types": "./dist/repoAnalysis.d.ts"
+    },
+    "./run": {
+      "require": "./dist/run.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "scan": "ts-node src/run.ts",
+    "scan:compiled": "node dist/run.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "tree-sitter-wasms": "^0.1.13",
+    "ts-morph": "^28.0.0",
+    "web-tree-sitter": "^0.26.9"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  }
+}

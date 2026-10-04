@@ -1,0 +1,102 @@
+/* components/ExternalChangesBanner/ExternalChangesBanner.module.css */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  animation: slideDown .16s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.icon {
+  font-size: 13px;
+  color: var(--cyan);
+  flex-shrink: 0;
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail {
+  color: var(--text-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btnReindex {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid var(--cyan);
+  background: var(--cyan);
+  color: var(--bg-base);
+  transition: opacity .14s;
+  white-space: nowrap;
+}
+.btnReindex:hover:not(:disabled) {
+  opacity: .88;
+}
+.btnReindex:disabled,
+.btnReindex.reindexing {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid rgba(255,255,255,.3);
+  border-top-color: var(--bg-base);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btnDismiss {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background .12s, color .12s;
+}
+.btnDismiss:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--error) 12%, transparent);
+  color: var(--error);
+}
+.btnDismiss:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}

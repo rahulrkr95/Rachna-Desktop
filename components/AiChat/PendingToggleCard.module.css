@@ -1,0 +1,79 @@
+/* components/AiChat/PendingToggleCard.module.css */
+
+.card {
+  margin-top: 10px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 10px;
+  background: rgba(245, 158, 11, 0.06);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cardResolved {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.textCol {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--text-primary, #e5e7eb);
+}
+
+.subtitle {
+  color: var(--text-secondary, #9ca3af);
+  margin-top: 2px;
+}
+
+/* ── Toggle switch ───────────────────────────────────────────────────────── */
+
+.toggle {
+  flex-shrink: 0;
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.15);
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.toggle:hover:not(:disabled) {
+  background: rgba(245, 158, 11, 0.25);
+}
+
+.toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f59e0b;
+  transition: transform 0.15s;
+}

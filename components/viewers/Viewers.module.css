@@ -1,0 +1,175 @@
+/* Viewers.module.css — shared styles for non-text file viewers */
+
+.previewSurface {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  background: var(--bg-base);
+  padding: 24px;
+}
+
+.emptyState {
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 13px;
+  text-align: center;
+}
+
+.link {
+  color: var(--accent, #6ee7ff);
+  text-decoration: underline;
+}
+
+/* ── Images ── */
+.imageWrap {
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(45deg, var(--bg-panel) 25%, transparent 25%, transparent 75%, var(--bg-panel) 75%) 0 0 / 20px 20px,
+    linear-gradient(45deg, var(--bg-panel) 25%, transparent 25%, transparent 75%, var(--bg-panel) 75%) 10px 10px / 20px 20px,
+    var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── PDF ── */
+.pdfFrame {
+  width: 100%;
+  height: 80vh;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-surface);
+}
+
+/* ── Video ── */
+.videoWrap {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.videoEl {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #000;
+}
+
+/* ── Audio ── */
+.mediaCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px 40px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-width: 320px;
+}
+
+.mediaIcon {
+  font-size: 32px;
+  color: var(--text-secondary);
+}
+
+.mediaName {
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: var(--text-secondary);
+  word-break: break-all;
+}
+
+.mediaMeta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.audioEl {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Binary info panel ── */
+.infoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 40px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-width: 360px;
+  max-width: 520px;
+}
+
+.infoIcon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  font-family: var(--font-code);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.infoName {
+  font-family: var(--font-code);
+  font-size: 14px;
+  color: var(--text-primary, var(--text-secondary));
+  word-break: break-all;
+  text-align: center;
+}
+
+.infoList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  width: 100%;
+  font-size: 12px;
+  margin: 0;
+}
+
+.infoList dt {
+  color: var(--text-muted);
+  font-family: var(--font-code);
+}
+
+.infoList dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  word-break: break-all;
+  text-align: right;
+}
+
+.infoPath {
+  font-size: 11px;
+}
+
+.infoNote {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+}

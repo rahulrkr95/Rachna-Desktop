@@ -1,0 +1,248 @@
+/* CommandPalette.module.css */
+
+/* ── Backdrop ──────────────────────────────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 9000;
+  padding: 72px 16px 16px;
+  animation: fadeIn 0.12s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Palette panel ─────────────────────────────────────────────────────────── */
+.palette {
+  width: 640px;
+  max-width: calc(100vw - 32px);
+  max-height: min(72vh, 580px);
+  background: var(--bg-panel);
+  border: 1px solid var(--border-bright);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 6%, transparent),
+    0 24px 64px rgba(0, 0, 0, 0.72),
+    0 8px 24px rgba(0, 0, 0, 0.48);
+  animation: slideIn 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translateY(-10px) scale(0.97);
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ── Search row ────────────────────────────────────────────────────────────── */
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.searchIcon {
+  font-size: 15px;
+  color: var(--cyan);
+  opacity: 0.75;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.input {
+  flex: 1;
+  height: 46px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  caret-color: var(--cyan);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: color 0.1s, background 0.1s;
+}
+.clearBtn:hover {
+  color: var(--text-on-hover);
+  background: var(--bg-hover);
+}
+
+/* ── Results list ──────────────────────────────────────────────────────────── */
+.list {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.list::-webkit-scrollbar       { width: 6px; }
+.list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.empty {
+  padding: 28px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── Result row ────────────────────────────────────────────────────────────── */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  cursor: pointer;
+  min-height: 38px;
+  transition: background 0.07s;
+}
+
+.itemActive {
+  background: var(--bg-hover);
+}
+
+.itemActive .itemLabel,
+.itemActive .itemDesc,
+.itemActive .itemIcon {
+  color: var(--text-on-hover);
+}
+
+.itemActive .itemIcon { color: var(--cyan); }
+
+.itemIcon {
+  font-size: 13px;
+  width: 18px;
+  flex-shrink: 0;
+  text-align: center;
+  color: var(--text-secondary);
+  transition: color 0.07s;
+}
+
+.itemBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.itemLabel {
+  font-size: 13px;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemDesc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Right-side meta (category + shortcut) ─────────────────────────────────── */
+.itemMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.itemCat {
+  font-size: 10px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  opacity: 0.5;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.itemShortcut {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Fuzzy-match highlights ────────────────────────────────────────────────── */
+.hl {
+  background: transparent;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+/* ── Keyboard hint badges ──────────────────────────────────────────────────── */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--bg-sidebar, var(--bg-input));
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 5px 14px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.hintRight {
+  margin-left: auto;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  opacity: 0.35;
+  letter-spacing: 0.05em;
+}

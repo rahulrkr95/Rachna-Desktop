@@ -1,0 +1,47 @@
+/* ChatDialogHeader.module.css */
+
+/* With native window decorations hidden in chat mode (see
+   services/viewModeWindow.ts), there's no title bar left to drag the
+   window by. This thin strip across the top restores that ability. */
+.dragBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  z-index: 10;
+  -webkit-app-region: drag;
+}
+
+.actions {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.iconBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.iconBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+  border-color: var(--accent);
+  opacity: 1;
+}

@@ -1,0 +1,115 @@
+/* HtmlDesignView.module.css — dual Code/Design view for .html files */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.toggleBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  flex-shrink: 0;
+}
+
+.toggleGroup {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.toggleBtn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toggleBtn:hover {
+  color: var(--text-secondary);
+}
+
+.toggleBtnActive,
+.toggleBtnActive:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary, var(--text-secondary));
+}
+
+.refreshBtn {
+  border: 1px solid var(--border);
+  background: var(--bg-base);
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--bg-hover);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.surface {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.designSurface {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: var(--bg-base);
+  padding: 24px;
+}
+
+.designImageWrap {
+  max-width: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.designImage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.statusMsg {
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 13px;
+  margin-top: 40px;
+}
+
+.errorMsg {
+  color: var(--text-error, #f87171);
+  font-family: var(--font-code);
+  font-size: 13px;
+  margin-top: 40px;
+  max-width: 480px;
+  text-align: center;
+}

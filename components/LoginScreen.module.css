@@ -1,0 +1,288 @@
+/* components/LoginScreen.module.css */
+
+.container {
+  /* Modal overlay — shown on demand, over whichever view is active. */
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 8, 12, 0.78);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(99, 59, 255, 0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(124, 92, 252, 0.06) 0%, transparent 60%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  width: min(420px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 2.5rem 2.5rem 2rem;
+  background: rgba(22, 22, 30, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(99, 59, 255, 0.08) inset;
+  text-align: center;
+  /* Card itself should not be draggable */
+  -webkit-app-region: no-drag;
+}
+
+/* ── Logo ─────────────────────────────────────────────────────────────────── */
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.55rem;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #7c5cfc 0%, #4f35c2 100%);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(99, 59, 255, 0.4);
+}
+
+.logoText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.logoAccent {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #7c5cfc;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* ── Tagline ─────────────────────────────────────────────────────────────── */
+
+.tagline {
+  color: #6b6b80;
+  font-size: 0.875rem;
+  margin: 0 0 1.6rem;
+  line-height: 1.5;
+}
+
+/* ── Form ─────────────────────────────────────────────────────────────────── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+  width: 100%;
+  min-width: 260px;
+}
+
+.input {
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  -webkit-app-region: no-drag;
+}
+
+.input::placeholder {
+  color: #55556a;
+}
+
+.input:focus {
+  border-color: rgba(124, 92, 252, 0.6);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.input:disabled {
+  opacity: 0.6;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── Sign-in button ──────────────────────────────────────────────────────── */
+
+.signInBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 2rem;
+  margin-top: 0.35rem;
+  background: linear-gradient(135deg, #7c5cfc 0%, #5535e8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px rgba(99, 59, 255, 0.35);
+  outline: none;
+}
+
+.signInBtn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(99, 59, 255, 0.45);
+}
+
+.signInBtn:active {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 3px 12px rgba(99, 59, 255, 0.3);
+}
+
+.signInBtn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.45);
+}
+
+.signInBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+/* ── Hint text ───────────────────────────────────────────────────────────── */
+
+.hint {
+  color: #44445a;
+  font-size: 0.78rem;
+  margin: 0.85rem 0 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── Version badge ───────────────────────────────────────────────────────── */
+
+.version {
+  margin-top: 2.5rem;
+  font-size: 0.7rem;
+  color: #333348;
+  letter-spacing: 0.04em;
+}
+
+/* ── Close button ────────────────────────────────────────────────────────── */
+
+.closeBtn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #6b6b80;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+/* ── Continue with Google ────────────────────────────────────────────────── */
+
+.googleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: #ffffff;
+  color: #1f1f26;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.googleBtn:hover { opacity: 0.92; }
+.googleBtn:disabled { opacity: 0.6; cursor: default; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1.1rem 0 1rem;
+  color: #55556a;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Text-style buttons ──────────────────────────────────────────────────── */
+
+.linkBtn {
+  background: none;
+  border: none;
+  margin-top: 0.4rem;
+  padding: 0.4rem;
+  color: #8a8aa0;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.linkBtn:hover { color: #ffffff; }
+
+.inlineLink {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #7c5cfc;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.inlineLink:hover { color: #9a82ff; }

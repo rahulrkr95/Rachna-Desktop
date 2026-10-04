@@ -1,0 +1,28 @@
+{
+  "id": "figma",
+  "name": "Figma",
+  "description": "Read Figma files and comments via a remote MCP server, authenticated with your Figma account through OAuth.",
+  "version": "1.0.0",
+  "icon": "figma",
+  "vendor": "Figma",
+  "auth": {
+    "type": "oauth",
+    "oauthProviderId": "figma",
+    "instructions": "Sign in with your Figma account in the browser window that opens.",
+    "helpUrl": "https://www.figma.com/developers/api#oauth2"
+  },
+  "transport": {
+    "kind": "mcp-http",
+    "url": "https://YOUR-FIGMA-MCP-SERVER/mcp"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read Figma files",
+    "Read Figma comments"
+  ],
+  "comingSoon": true
+}

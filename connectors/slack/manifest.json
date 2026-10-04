@@ -1,0 +1,29 @@
+{
+  "id": "slack",
+  "name": "Slack",
+  "description": "Read and post to Slack channels via a remote MCP server, authenticated with your Slack workspace through OAuth.",
+  "version": "1.0.0",
+  "icon": "slack",
+  "vendor": "Slack",
+  "auth": {
+    "type": "oauth",
+    "oauthProviderId": "slack",
+    "instructions": "Sign in and authorize Rachna for your Slack workspace in the browser window that opens.",
+    "helpUrl": "https://api.slack.com/authentication/oauth-v2"
+  },
+  "transport": {
+    "kind": "mcp-http",
+    "url": "https://YOUR-SLACK-MCP-SERVER/mcp"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read channel messages",
+    "Search messages",
+    "Post messages"
+  ],
+  "comingSoon": true
+}

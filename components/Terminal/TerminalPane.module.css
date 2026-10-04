@@ -1,0 +1,30 @@
+/* components/Terminal/TerminalPane.module.css */
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--bg-base);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.panels {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--text-muted, #6b7280);
+  font-size: 0.85rem;
+  padding: 1rem;
+  text-align: center;
+}

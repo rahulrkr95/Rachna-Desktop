@@ -1,0 +1,357 @@
+/* Header.module.css */
+.header {
+  height: var(--header-h);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 16px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.menuItem {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.01em;
+}
+
+.menuItem:hover {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Run configuration toolbar ────────────────────────────────────────── */
+
+.runBar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+  margin-right: 4px;
+  border-right: 1px solid var(--border);
+}
+
+.runConfigSelect {
+  height: 26px;
+  max-width: 150px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-bright);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.13s;
+}
+
+.runConfigSelect:hover {
+  color: var(--text-primary);
+  border-color: var(--cyan);
+}
+
+.btnBuild {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.13s;
+  flex-shrink: 0;
+}
+
+.btnBuild:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--amber);
+}
+
+.btnRun {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--cyan);
+  color: var(--bg-base);
+  border: 1px solid var(--cyan);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.13s;
+  flex-shrink: 0;
+}
+
+.btnRun:hover {
+  filter: brightness(1.1);
+}
+
+.btnGit {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: all 0.15s;
+}
+
+.btnGit {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-bright);
+}
+
+.btnGit:hover {
+  color: var(--text-on-hover);
+  background: var(--bg-hover);
+}
+
+/* Light theme: the transparent/secondary-text styling above reads fine on
+   dark headers, but blends into the light header background and makes the
+   "⎇ main" icon/text hard to see. Give it a subtle white-tinted background
+   plate so the icon and label stay legible. */
+[data-theme='light'] .btnGit {
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-bright);
+}
+
+[data-theme='light'] .btnGit:hover {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+}
+
+.btnUpdate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.15s;
+  background: color-mix(in srgb, var(--cyan) 14%, transparent);
+  color: var(--cyan);
+  border: 1px solid color-mix(in srgb, var(--cyan) 45%, transparent);
+  animation: updatePulse 2.4s ease-in-out infinite;
+}
+
+.btnUpdate:hover {
+  background: var(--cyan);
+  color: var(--bg-base);
+}
+
+@keyframes updatePulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--cyan) 35%, transparent); }
+  50%      { box-shadow: 0 0 0 4px color-mix(in srgb, var(--cyan) 0%, transparent); }
+}
+
+.btnSettings {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.13s;
+  flex-shrink: 0;
+}
+
+.btnSettings:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--cyan);
+}
+
+.btnTheme {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.13s;
+  flex-shrink: 0;
+}
+
+.btnTheme:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+  color: var(--amber);
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ── Dropdown menu ────────────────────────────────────────────────────────── */
+
+.menuItemWrapper {
+  position: relative;
+}
+
+.menuItemActive {
+  background: var(--bg-hover) !important;
+  color: var(--text-on-hover) !important;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 230px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-bright);
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  z-index: 9999;
+  animation: dropdownIn 0.1s ease;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdownSep {
+  height: 1px;
+  background: var(--border);
+  margin: 3px 6px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s, color 0.1s;
+  white-space: nowrap;
+}
+
+.dropdownItem:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+}
+
+.dropdownItemDanger {
+  color: var(--error) !important;
+}
+
+.dropdownItemDanger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--error) 10%, transparent) !important;
+  color: var(--error) !important;
+}
+
+.dropdownItemDisabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dropdownIcon {
+  width: 16px;
+  flex-shrink: 0;
+  font-size: 11px;
+  text-align: center;
+  opacity: 0.75;
+}
+
+.dropdownLabel {
+  flex: 1;
+}
+
+.dropdownShortcut {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  flex-shrink: 0;
+}

@@ -1,0 +1,87 @@
+/* ColorSwatch.module.css */
+
+/* ── Swatch wrapper ─────────────────────────────────────────────────────── */
+.swatchWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 3px;
+  padding: 0 2px;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+
+.swatchWrapper:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Color square ────────────────────────────────────────────────────────── */
+.swatchSquare {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  position: relative;
+  /* Checkerboard behind for transparent/alpha colors */
+  background-image: linear-gradient(45deg, #888 25%, transparent 25%),
+                    linear-gradient(-45deg, #888 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #888 75%),
+                    linear-gradient(-45deg, transparent 75%, #888 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 0 2px, 2px -2px, -2px 0;
+  /* The actual color is set via style.backgroundColor which renders on top */
+}
+
+/* Override: the backgroundColor is applied via inline style on top of the checkerboard */
+.swatchSquare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+}
+
+/* Light border (for very dark colors that need visibility) */
+.swatchBorderLight {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45), inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* Dark border (for very light colors that need visibility) */
+.swatchBorderDark {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+/* ── Text label beside the swatch ────────────────────────────────────────── */
+.swatchLabel {
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--text-code, #c9d8f0);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* ── Color group row ─────────────────────────────────────────────────────── */
+.colorGroupRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.colorGroupLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary, #8299c0);
+  margin-right: 2px;
+}
+
+/* ── PDF export ──────────────────────────────────────────────────────────── */
+/* When rendering in the PDF iframe, swatches need to be visible */
+.swatchSquare[data-pdf] {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}

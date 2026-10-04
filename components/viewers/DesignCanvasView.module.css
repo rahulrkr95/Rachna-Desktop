@@ -1,0 +1,285 @@
+/* DesignCanvasView.module.css — infinite pan/zoom board of rendered design pages */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  flex-shrink: 0;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-code);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary, var(--text-secondary));
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.toolBtn,
+.closeBtn {
+  border: 1px solid var(--border);
+  background: var(--bg-base);
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.toolBtn:hover,
+.closeBtn:hover {
+  background: var(--bg-hover);
+}
+
+.closeBtn {
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.toolBtnPrimary {
+  border: 1px solid var(--accent, #6366f1);
+  background: var(--accent, #6366f1);
+  color: #fff;
+  font-family: var(--font-code);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1.4;
+  margin-left: 4px;
+}
+
+.toolBtnPrimary:hover {
+  opacity: 0.9;
+}
+
+.frameBadge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--bg-hover);
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+
+.zoomLabel {
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: center;
+}
+
+.canvas {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-base);
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  cursor: grab;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+.frame {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  user-select: none;
+}
+
+.frameLabel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: grab;
+}
+
+.frameLabel:active {
+  cursor: grabbing;
+}
+
+.frameName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.refreshBtn {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.refreshBtn:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+.frameSurface {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.frameIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #fff;
+}
+
+/* ── Resize handle — bottom-right corner of the frame surface ───────────── */
+.resizeHandle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  z-index: 2;
+  /* diagonal grip lines, drawn with a gradient so no extra markup/SVG is
+     needed — visible on hover/always-faint the rest of the time so users
+     can discover it without cluttering the card. */
+  background:
+    linear-gradient(135deg, transparent 0%, transparent 45%, var(--border) 45%, var(--border) 55%, transparent 55%, transparent 60%, var(--border) 60%, var(--border) 70%, transparent 70%, transparent 75%, var(--border) 75%, var(--border) 85%, transparent 85%);
+  opacity: 0.6;
+  border-radius: 0 0 8px 0;
+  transition: opacity 0.12s, background-color 0.12s;
+}
+
+.resizeHandle:hover,
+.resizeHandle:active {
+  opacity: 1;
+  background-color: var(--bg-hover);
+}
+
+.frameStatus {
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.frameError {
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--text-error, #f87171);
+  padding: 12px;
+  text-align: center;
+}
+
+.openBtn {
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 11px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.openBtn:hover {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.emptyState,
+.loadError {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 420px;
+}
+
+.emptyState strong,
+.emptyHint { display: block; }
+.emptyState strong { color: var(--text-secondary); font-size: 15px; margin-bottom: 14px; }
+.emptyHint { margin-top: 6px; }
+.recentGrid { display: grid; gap: 8px; width: min(520px, 70vw); max-height: 320px; overflow-y: auto; }
+.recentCard { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-panel); color: var(--text-primary); text-align: left; cursor: pointer; }
+.recentCard:hover { border-color: var(--accent, #6366f1); background: var(--bg-hover); }
+.recentIcon { font-size: 20px; }
+.recentDetails { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.recentName { font-size: 13px; font-weight: 600; }
+.recentPath { color: var(--text-muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.loadError {
+  color: var(--text-error, #f87171);
+}

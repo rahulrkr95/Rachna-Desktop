@@ -1,0 +1,289 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panelHeader h3 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+}
+
+.hint {
+  font-size: 12.5px;
+  opacity: 0.7;
+  margin: 4px 0;
+}
+
+.errorText {
+  font-size: 12.5px;
+  color: #e5534b;
+  margin: 4px 0;
+}
+
+.serverCard {
+  border: 1px solid var(--border-color, #333);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.serverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.serverHeaderMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.serverName {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.serverMeta {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.serverActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.serverActions button {
+  font-size: 12.5px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #333);
+  background: transparent;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  opacity: 0.85;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #777;
+}
+
+.dotConnected { background: #3fb950; }
+.dotConnecting { background: #d29922; }
+.dotError { background: #e5534b; }
+.dotDisconnected { background: #777; }
+
+.serverDetails {
+  border-top: 1px solid var(--border-color, #333);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.serverDetails ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+.addServerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+}
+
+.field input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #333);
+  background: transparent;
+  font-size: 13px;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+}
+
+.formActions button {
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #333);
+  cursor: pointer;
+}
+
+/* ── Connector grid (square tiles) ──────────────────────────────────────── */
+
+.connectorGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 10px;
+}
+
+.connectorTile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 16px 10px 12px;
+  background: var(--bg-surface, transparent);
+  border: 1px solid var(--border-color, #333);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s, box-shadow 0.15s;
+  min-height: 132px;
+}
+
+.connectorTile:hover {
+  border-color: var(--border-bright, #555);
+  background: var(--bg-hover, rgba(255, 255, 255, 0.04));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.connectorTile:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.connectorTileActive {
+  border-color: var(--border-bright, #555);
+}
+
+/* ── Coming soon (non-clickable) tiles ───────────────────────────────── */
+
+.connectorTileDisabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(0.6);
+}
+
+.connectorTileDisabled:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border-color, #333);
+  background: var(--bg-surface, transparent);
+}
+
+.comingSoonOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.comingSoonTag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: color-mix(in srgb, var(--accent, #6ea8fe) 70%, #000 30%);
+  padding: 3px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.connectorTileStatus {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.connectorTileIcon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color, #333);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  background: #0d1117; /* neutral dark chip so brand-color/white logos read consistently regardless of theme */
+  overflow: hidden;
+}
+
+.connectorTileName {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.connectorTileMeta {
+  font-size: 10px;
+  opacity: 0.7;
+  line-height: 1.3;
+}
+
+.connectorTileBtn {
+  margin-top: auto;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #333);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.connectorTile:hover .connectorTileBtn {
+  opacity: 1;
+}
+
+/* ── Drill-down detail view ─────────────────────────────────────────────── */
+
+.detailPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.backBtn {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid var(--border-color, #333);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}

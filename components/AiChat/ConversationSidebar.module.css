@@ -1,0 +1,491 @@
+/* components/AiChat/ConversationSidebar.module.css */
+
+/* ── Panel shell ─────────────────────────────────────────────────────────── */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  min-width: 200px;
+  max-width: 300px;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border);
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: width 0.2s ease, min-width 0.2s ease, background 0.2s, border-color 0.2s;
+}
+
+.sidebar.collapsed {
+  width: 32px;
+  min-width: 32px;
+}
+
+/* ── Embedded mode: rendered inside the left panel's own "Chat" tab
+   (alongside File Explorer / Git / Design Canvas) instead of as its own
+   permanently-docked rail — fills whatever width that panel has (driven
+   by IDELayout's resizable sidebarLeft) instead of carrying its own fixed
+   width/border. ── */
+.sidebar.embedded {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  border-right: none;
+}
+
+/* IDELayout pins its panel retract control over the top-right corner of an
+   embedded sidebar. Reserve that control's 20px width plus spacing here so
+   the chat header actions stop before it instead of placing Clear All beneath
+   the retract button. Standalone Chat View has no outer retract control and
+   therefore keeps the full header width. */
+.sidebar.embedded .header {
+  padding-right: 31px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 5px 3px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 6px;
+  transition: border-color 0.2s;
+  /* Sits inside the window's top 36px in Chat View, under the invisible
+     drag-bar (position:absolute, z-index:10 — see
+     ChatDialogHeader.module.css). Needs position+z-index (not z-index
+     alone — it's a no-op without a position) plus no-drag so the
+     collapse/expand and refresh buttons are actually clickable there. */
+  position: relative;
+  z-index: 15;
+  -webkit-app-region: no-drag;
+}
+
+.headerTitle {
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  user-select: none;
+  flex: 1;
+  /* Truncate instead of squeezing .headerActions when the panel is narrow
+     — the icon buttons must keep their own space, never be pushed into
+     each other. */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Single row for every header icon button (refresh / clear-all / collapse).
+   Grouping them in their own flex container — instead of leaving each one
+   as a direct, individually-spaced child of .header — is what actually
+   guarantees a fixed gap between them; relying on .header's own
+   space-between let them collide when the title truncated or the panel was
+   narrow (docked "Chat" tab, and the 400×600 Chat View dialog). */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.toggleBtn {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 9px;
+  line-height: 1;
+  padding: 0;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.2s;
+  /* Emoji glyphs (⟳ 🗑 ◀ ▶) render at their own intrinsic size regardless
+     of font-size in some renderers — clip to the button's box so an
+     oversized glyph can never visually bleed into the next button instead
+     of just sitting inside its own square. */
+  overflow: hidden;
+}
+
+.toggleBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+}
+
+.toggleBtn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.spinning {
+  display: inline-block;
+  animation: sidebarRefreshSpin 0.8s linear infinite;
+}
+
+@keyframes sidebarRefreshSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.newBtn {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.newBtn:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+}
+
+/* ── "New chat" button — prominent, ChatGPT/Claude-style ─────────────────── */
+
+.newChatBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 8px 4px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.newChatBtn:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+}
+
+.newChatIcon {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* ── Date group headers (Today / Yesterday / …) ──────────────────────────── */
+
+.group {
+  margin-bottom: 2px;
+}
+
+.groupLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 12px 4px;
+  user-select: none;
+}
+
+/* ── Project groups ("User Chats" flat section + one per project) ───────── */
+
+.projectsSection {
+  margin-top: 2px;
+}
+
+.projectGroup {
+  margin-bottom: 2px;
+}
+
+/* Project histories remain fully clickable/restorable when their project is
+   not open (including welcome mode); the muted treatment only communicates
+   that they are outside the current context. */
+.projectGroupNonCurrent {
+  opacity: 0.58;
+}
+
+.projectGroupNonCurrent:hover,
+.projectGroupNonCurrent:focus-within {
+  opacity: 0.82;
+}
+
+.projectGroupHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  margin: 1px 6px;
+  border-radius: 6px;
+  user-select: none;
+  transition: background 0.12s;
+}
+
+/* Project group headers are clickable (toggle expand/collapse); the
+   "User Chats" header just uses the base .projectGroupHeader (static). */
+.projectGroupHeaderClickable {
+  cursor: pointer;
+}
+
+.projectGroupHeaderClickable:hover {
+  background: var(--bg-hover);
+}
+
+.projectGroupChevron {
+  flex-shrink: 0;
+  width: 10px;
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.projectGroupIcon {
+  flex-shrink: 0;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.projectGroupLabel {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.projectGroupCount {
+  flex-shrink: 0;
+  font-size: 9.5px;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 6px;
+  line-height: 1.5;
+}
+
+/* ── Scrollable list ─────────────────────────────────────────────────────── */
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0 8px;
+}
+
+.list::-webkit-scrollbar {
+  width: 3px;
+}
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.list::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 1.5px;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+
+.empty {
+  padding: 16px 10px;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Individual conversation row ─────────────────────────────────────────── */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 8px;
+  margin: 1px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.2s;
+  min-height: 30px;
+  border: 1px solid transparent;
+}
+
+.item:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.item.active {
+  background: var(--bg-active);
+  border-color: var(--border-bright);
+}
+
+.item:hover .itemTitle,
+.item:hover .itemDate,
+.item.active .itemTitle,
+.item.active .itemDate {
+  color: var(--text-on-hover);
+}
+
+.itemText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.itemTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+/* ── Running spinner ──────────────────────────────────────────────────────
+   Shown on a conversation row's title while its agent run is in flight —
+   including when that conversation isn't the one currently open, so a
+   background/older chat still visibly reports it's generating. Reuses the
+   same rotation keyframe as the sidebar's own refresh-icon spinner above. */
+.runningSpinner {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  vertical-align: middle;
+  border: 1.5px solid color-mix(in srgb, var(--accent, #6c8cff) 35%, transparent);
+  border-top-color: var(--accent, #6c8cff);
+  border-radius: 50%;
+  animation: sidebarRefreshSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.itemDate {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+/* ── Trash button ─────────────────────────────────────────────────────────── */
+
+.deleteBtn {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  opacity: 0;
+  transition: opacity 0.12s, color 0.12s, background 0.12s;
+  padding: 0;
+  margin-left: 2px;
+}
+
+.item:hover .deleteBtn,
+.item.active .deleteBtn {
+  opacity: 1;
+}
+
+.deleteBtn:hover {
+  color: var(--red);
+  background: color-mix(in srgb, var(--error) 15%, transparent);
+}
+
+/* ── Confirm-delete inline state ─────────────────────────────────────────── */
+
+.confirmRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  margin: 1px 3px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--error) 10%, transparent);
+  border: 1px solid var(--red);
+  min-height: 28px;
+}
+
+.confirmLabel {
+  flex: 1;
+  font-size: 9.5px;
+  color: var(--red);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.confirmYes {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--red);
+  background: color-mix(in srgb, var(--error) 15%, transparent);
+  color: var(--red);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.confirmYes:hover {
+  background: color-mix(in srgb, var(--error) 30%, transparent);
+}
+
+.confirmNo {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+.confirmNo:hover {
+  background: var(--bg-hover);
+}
+
+/* ── "Clear all" inline confirm — sits as a small popover under the header
+   button instead of inline in the flow, since the header row is a fixed
+   height and this needs more room for the label + two buttons. ────────── */
+.clearAllConfirm {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 4px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px;
+  border-radius: 5px;
+  background: var(--bg-surface);
+  border: 1px solid var(--red);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.clearAllConfirmLabel {
+  font-size: 10px;
+  color: var(--text-primary);
+  margin-right: 2px;
+}

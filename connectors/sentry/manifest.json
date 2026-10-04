@@ -1,0 +1,32 @@
+{
+  "id": "sentry",
+  "name": "Sentry",
+  "description": "Read errors and events via the official Sentry MCP server.",
+  "version": "1.0.0",
+  "icon": "sentry",
+  "vendor": "Sentry",
+  "auth": {
+    "type": "pat",
+    "fields": [
+      { "key": "token", "label": "Auth token", "secret": true, "placeholder": "sntryu_..." },
+      { "key": "org", "label": "Organization slug", "secret": false, "placeholder": "my-org" }
+    ],
+    "instructions": "Create a Sentry auth token with project:read and event:read scopes, and enter your organization's slug.",
+    "helpUrl": "https://docs.sentry.io/product/integrations/integration-platform/internal-integration/"
+  },
+  "transport": {
+    "kind": "mcp-stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-sentry"],
+    "envFromAuth": ["SENTRY_AUTH_TOKEN", "SENTRY_ORG"]
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read Sentry errors and events",
+    "Read Sentry project issues"
+  ]
+}

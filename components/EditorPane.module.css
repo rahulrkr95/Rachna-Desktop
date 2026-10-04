@@ -1,0 +1,184 @@
+/* EditorPane.module.css */
+.pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* ── Tabs ── */
+.tabBar {
+  height: var(--tab-h);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 32px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.12s;
+  position: relative;
+  user-select: none;
+}
+.tab:hover { background: var(--bg-hover); color: var(--text-secondary); }
+
+.tabActive {
+  background: var(--bg-base) !important;
+  color: var(--text-primary) !important;
+  border-top: 1px solid var(--cyan);
+}
+
+.tabName { white-space: nowrap; }
+
+.tabDirty {
+  color: var(--amber);
+  font-size: 10px;
+  line-height: 1;
+}
+
+.tabClose {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s;
+  padding: 0;
+  line-height: 1;
+}
+.tabClose:hover { background: var(--bg-hover); color: var(--text-on-hover); }
+
+/* lang dots */
+.dot     { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dotTs   { background: var(--cyan);   }
+.dotTsx  { background: var(--purple); }
+.dotCss  { background: var(--warning);       }
+.dotJson { background: var(--green);  }
+.dotMd   { background: var(--accent);       }
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 16px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sep             { color: var(--border-bright); }
+.breadcrumbPart  { color: var(--text-muted); }
+.breadcrumbLast  { color: var(--text-secondary); }
+
+/* ── Editor Surface ── */
+.surface {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+  /* Monaco fills this container via height:100% */
+}
+
+/* Empty state when no file is open */
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-base);
+}
+
+
+
+/* ── Diff Tab styles ──────────────────────────────────────────────────────── */
+
+/* Base diff tab — amber tinted to distinguish from file tabs */
+.tabDiff {
+  border-top: 1px solid transparent;
+  position: relative;
+}
+
+/* Subtle amber top-border stripe to signal "pending AI change" */
+.tabDiff::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--amber);
+  opacity: 0.55;
+  border-radius: 1px;
+}
+
+.tabDiffActive {
+  background: var(--bg-base) !important;
+  color: var(--amber) !important;
+  border-top: none !important;
+}
+
+.tabDiffActive::before {
+  opacity: 1;
+  background: var(--amber);
+}
+
+.tabDiffActive .tabName {
+  color: var(--amber);
+}
+
+/* ⎇ icon in diff tab */
+.diffTabIcon {
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.tabDiffActive .diffTabIcon {
+  color: var(--amber);
+}
+
+/* "AI" badge chip on diff tabs */
+.diffTabBadge {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  color: var(--amber);
+  border: 1px solid color-mix(in srgb, var(--warning) 28%, transparent);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+[data-theme='light'] .diffTabBadge {
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--warning);
+  border-color: rgba(245, 166, 35, 0.35);
+}

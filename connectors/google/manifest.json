@@ -1,0 +1,33 @@
+{
+  "id": "google",
+  "name": "Google (Gmail)",
+  "description": "Read and send Gmail via a local MCP server, authenticated with your Google account through OAuth.",
+  "version": "1.0.0",
+  "icon": "google",
+  "vendor": "Google",
+  "auth": {
+    "type": "api-key",
+    "fields": [
+      { "key": "oauthKeysPath", "label": "Path to gcp-oauth.keys.json", "secret": false, "placeholder": "/Users/you/.gmail-mcp/gcp-oauth.keys.json" }
+    ],
+    "instructions": "1) In Google Cloud Console, create an OAuth 2.0 Client ID (Desktop app type) with the Gmail API enabled, and download it as gcp-oauth.keys.json. 2) Enter the path to that file below. 3) The first time the server runs it will open a browser window for you to sign in and consent - the resulting token is cached locally so you won't need to log in again.",
+    "helpUrl": "https://console.cloud.google.com/apis/credentials"
+  },
+  "transport": {
+    "kind": "mcp-stdio",
+    "command": "npx",
+    "args": ["-y", "@gongrzhe/server-gmail-autoauth-mcp"],
+    "envFromAuth": ["GMAIL_OAUTH_PATH"]
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read Gmail messages",
+    "Search Gmail",
+    "Send Gmail messages",
+    "Manage Gmail labels"
+  ]
+}

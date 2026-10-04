@@ -1,0 +1,105 @@
+
+*.js.map
+*.d.ts.map
+
+# ============================================================
+# rachna-reposcanner — TypeScript Node library
+# ============================================================
+
+# ─────────────────────────────────────────
+# Node / npm
+# ─────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.pnpm-store/
+.yarn/
+
+# ─────────────────────────────────────────
+# TypeScript build output
+# (dist/ is produced by `npm run build` and
+#  consumed by rachna-ide at runtime;
+#  it is NOT committed — the IDE's prebuild
+#  script builds it from source)
+# ─────────────────────────────────────────
+dist/
+*.tsbuildinfo
+
+# ─────────────────────────────────────────
+# ts-node / ts-morph cache
+# ─────────────────────────────────────────
+.ts-node/
+tsconfig.tsbuildinfo
+
+# ─────────────────────────────────────────
+# ONNX / ML model files
+# (downloaded at runtime; too large for git)
+# ─────────────────────────────────────────
+*.onnx
+models/
+.cache/
+
+# ─────────────────────────────────────────
+# Tree-sitter WASM cache
+# (web-tree-sitter downloads these at runtime)
+# ─────────────────────────────────────────
+*.wasm
+!src/**/*.wasm
+
+# ─────────────────────────────────────────
+# Scanner runtime output
+# (produced when run.ts / run.js is invoked
+#  against a repo for testing)
+# ─────────────────────────────────────────
+scan-output/
+scan-results/
+*.scan.json
+.repo-index/
+.embeddings/
+.vector-db/
+
+# ─────────────────────────────────────────
+# Environment / secrets
+# ─────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────
+# Test / coverage
+# ─────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─────────────────────────────────────────
+# Logs
+# ─────────────────────────────────────────
+logs/
+*.log
+
+# ─────────────────────────────────────────
+# Temp / cache
+# ─────────────────────────────────────────
+tmp/
+.temp/
+.eslintcache
+
+# ─────────────────────────────────────────
+# OS artefacts
+# ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─────────────────────────────────────────
+# Editor
+# ─────────────────────────────────────────
+.idea/
+*.swp
+*.swo
+.vscode/settings.json
+.vscode/launch.json
+!.vscode/extensions.json

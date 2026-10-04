@@ -1,0 +1,29 @@
+{
+  "id": "notion",
+  "name": "Notion",
+  "description": "Search, read, and edit Notion pages and databases via a remote MCP server, authenticated with your Notion workspace through OAuth.",
+  "version": "1.0.0",
+  "icon": "notion",
+  "vendor": "Notion",
+  "auth": {
+    "type": "oauth",
+    "oauthProviderId": "notion",
+    "instructions": "Sign in and choose which Notion pages to share with Rachna in the browser window that opens.",
+    "helpUrl": "https://developers.notion.com/docs/authorization"
+  },
+  "transport": {
+    "kind": "mcp-http",
+    "url": "https://mcp.notion.com/mcp"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Search Notion workspace",
+    "Read Notion pages and databases",
+    "Create and edit Notion pages"
+  ],
+  "comingSoon": true
+}

@@ -1,0 +1,245 @@
+/* components/AiChat/BuildProjectDialog.module.css
+ *
+ * Full-viewport overlay for the "Build New Project" name/location dialog.
+ * Mirrors TerminalPermissionModal.module.css's palette and proportions.
+ */
+
+/* ── Overlay ─────────────────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.12s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal card ──────────────────────────────────────────────────────────── */
+
+.modal {
+  width: min(440px, calc(100vw - 32px));
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--bg-panel) 96%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 0 1px color-mix(in srgb, var(--border) 40%, transparent);
+  padding: 20px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: slideUp 0.15s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, var(--text-primary));
+  letter-spacing: 0.01em;
+}
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+
+.description {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  color: var(--text-secondary, var(--text-muted));
+  line-height: 1.5;
+}
+
+.fieldLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, var(--text-muted));
+  margin-top: 4px;
+}
+
+.textInput {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 12.5px;
+  color: var(--text-primary, var(--text-primary));
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+.textInput:focus {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.textInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.locationRow {
+  display: flex;
+  gap: 8px;
+}
+
+.locationRow .textInput {
+  flex: 1;
+  min-width: 0;
+}
+
+.browseBtn {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, var(--text-muted));
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+
+.browseBtn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent);
+}
+
+.browseBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.useDefaultBtn {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--accent) 85%, transparent);
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: -2px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.useDefaultBtn:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.useDefaultBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fieldHint {
+  font-size: 11px;
+  color: var(--text-muted, var(--text-muted));
+  margin-top: -2px;
+  word-break: break-all;
+}
+
+.fieldHint code {
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 11px;
+  color: color-mix(in srgb, var(--accent) 85%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+/* ── Error ───────────────────────────────────────────────────────────────── */
+
+.errorBox {
+  font-size: 12px;
+  color: var(--error);
+  background: color-mix(in srgb, var(--error) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
+  border-radius: 7px;
+  padding: 8px 10px;
+  line-height: 1.4;
+}
+
+/* ── Action buttons ──────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.cancelBtn,
+.createBtn {
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 7px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.12s, opacity 0.12s;
+  border: 1px solid transparent;
+  line-height: 1;
+}
+
+.cancelBtn {
+  background: var(--bg-surface);
+  border-color: var(--border);
+  color: var(--text-secondary, var(--text-muted));
+}
+
+.cancelBtn:hover:not(:disabled) {
+  background: var(--bg-hover);
+}
+
+.createBtn {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+}
+
+.createBtn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.createBtn:disabled,
+.cancelBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.createBtn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  outline-offset: 2px;
+}

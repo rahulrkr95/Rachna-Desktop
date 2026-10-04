@@ -1,0 +1,152 @@
+/* FileTree.module.css */
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  user-select: none;
+}
+
+/* ── Section header ── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.header:hover { color: var(--text-secondary); }
+
+.headerLabel { flex: 1; }
+
+/* ── Nodes container ── */
+.nodes {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty {
+  padding: 16px 20px;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Shared row base ── */
+.folderRow,
+.fileRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 10px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  min-height: 22px;
+  white-space: nowrap;
+}
+
+.folderRow:hover,
+.fileRow:hover {
+  background: var(--bg-hover);
+  color: var(--text-on-hover);
+}
+
+/* ── Indent guide lines ── */
+.indentGuide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── Chevron ── */
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.15s, color 0.15s;
+}
+.chevronOpen {
+  transform: rotate(90deg);
+  color: var(--text-secondary);
+}
+
+/* ── Folder icon ── */
+.folderIcon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+/* ── File row specifics ── */
+.fileRow {
+  color: var(--text-secondary);
+}
+
+.fileRowActive {
+  background: color-mix(in srgb, var(--accent) 7%, transparent) !important;
+  color: var(--cyan) !important;
+}
+.fileRowActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--cyan);
+  border-radius: 0 2px 2px 0;
+}
+
+.fileIconGlyph {
+  font-family: 'Nerd Font', 'JetBrains Mono', monospace;
+  font-size: 12px;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Lang dots ── */
+.langDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dotTs      { background: var(--cyan);   }
+.dotTsx     { background: var(--purple); }
+.dotJs      { background: #f7df1e;       }
+.dotJsx     { background: #f7df1e;       }
+.dotCss     { background: var(--warning);       }
+.dotJson    { background: var(--green);  }
+.dotMd      { background: var(--accent);       }
+.dotRs      { background: #f97316;       }
+.dotToml    { background: var(--text-muted);       }
+.dotHtml    { background: var(--error);       }
+.dotDefault { background: var(--border-bright); }

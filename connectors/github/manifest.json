@@ -1,0 +1,33 @@
+{
+  "id": "github",
+  "name": "GitHub",
+  "description": "Read and act on repositories, issues, and pull requests via the official GitHub MCP server.",
+  "version": "1.0.0",
+  "icon": "github",
+  "vendor": "GitHub",
+  "auth": {
+    "type": "pat",
+    "fields": [
+      { "key": "token", "label": "Personal Access Token", "secret": true, "placeholder": "ghp_..." }
+    ],
+    "instructions": "Create a fine-grained personal access token with repo read (and write, if you want the AI to open issues/PRs) scopes.",
+    "helpUrl": "https://github.com/settings/tokens"
+  },
+  "transport": {
+    "kind": "mcp-stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "envFromAuth": ["GITHUB_PERSONAL_ACCESS_TOKEN"]
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read repository contents",
+    "Read and search issues",
+    "Read and search pull requests",
+    "Read commit history"
+  ]
+}

@@ -1,0 +1,153 @@
+# ============================================================
+# rachna-ide — Tauri + React + TypeScript
+# ============================================================
+
+# ─────────────────────────────────────────
+# Node / npm
+# ─────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.pnpm-store/
+.yarn/
+
+# ─────────────────────────────────────────
+# Vite
+# ─────────────────────────────────────────
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# ─────────────────────────────────────────
+# TypeScript
+# ─────────────────────────────────────────
+*.tsbuildinfo
+
+# ─────────────────────────────────────────
+# Rust / Cargo (src-tauri)
+# ─────────────────────────────────────────
+src-tauri/target/
+src-tauri/gen/
+src-tauri/release/
+src-tauri/binaries/
+src-tauri/bundle/
+src-tauri/**/*.rs.bk
+**/*.pdb
+
+# ─────────────────────────────────────────
+# Tauri bundle outputs
+# ─────────────────────────────────────────
+src-tauri/target/release/bundle/
+src-tauri/target/debug/
+.tauri
+# ─────────────────────────────────────────
+# Repo scanner submodule
+# (source is tracked; built output is not)
+# ─────────────────────────────────────────
+lib/repo-scanner/dist/
+lib/repo-scanner/node_modules/
+
+# ─────────────────────────────────────────
+# LSP servers
+# (directories are tracked as empty stubs;
+#  installed binaries and packages are not)
+# ─────────────────────────────────────────
+lib/lsp-servers/pyright/node_modules/
+lib/lsp-servers/pyright/package.json
+lib/lsp-servers/pyright/package-lock.json
+lib/lsp-servers/pyright/pyright-langserver.js
+lib/lsp-servers/typescript/node_modules/
+lib/lsp-servers/typescript/package.json
+lib/lsp-servers/typescript/package-lock.json
+lib/lsp-servers/gopls/gopls
+lib/lsp-servers/gopls/gopls.exe
+lib/lsp-servers/rust-analyzer/rust-analyzer
+lib/lsp-servers/rust-analyzer/rust-analyzer.exe
+lib/lsp-servers/clangd/clangd
+lib/lsp-servers/clangd/clangd.exe
+lib/lsp-servers/clangd/bin/
+lib/lsp-servers/clangd/lib/
+
+# ─────────────────────────────────────────
+# Browser automation tool (Playwright)
+# ─────────────────────────────────────────
+lib/browser-tool/node_modules/
+lib/browser-tool/package-lock.json
+
+# ─────────────────────────────────────────
+# Test / coverage
+# ─────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─────────────────────────────────────────
+# Environment / secrets
+# ─────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─────────────────────────────────────────
+# Runtime-generated app data
+# (vector DBs, embeddings, sessions created
+#  by the IDE while it runs on a dev machine)
+# ─────────────────────────────────────────
+.embeddings/
+.vector-db/
+.chroma/
+.lancedb/
+.qdrant/
+workspace/
+sessions/
+
+# ─────────────────────────────────────────
+# SQLite databases (keychain / history)
+# ─────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ─────────────────────────────────────────
+# Logs
+# ─────────────────────────────────────────
+logs/
+*.log
+
+# ─────────────────────────────────────────
+# Cache / temp
+# ─────────────────────────────────────────
+.cache/
+.temp/
+tmp/
+.eslintcache
+.biomecache
+
+# ─────────────────────────────────────────
+# OS artefacts
+# ─────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─────────────────────────────────────────
+# Editor / IDE settings
+# (keep .vscode/extensions.json if you want
+#  to recommend extensions to contributors;
+#  ignore personal workspace settings)
+# ─────────────────────────────────────────
+.idea/
+*.swp
+*.swo
+*.swn
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+!.vscode/extensions.json
+
+
+
+.rachna/

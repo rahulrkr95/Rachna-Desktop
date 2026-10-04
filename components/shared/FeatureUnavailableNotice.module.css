@@ -1,0 +1,15 @@
+.badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-family: var(--font-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.02em; padding: 2px 8px; border-radius: 10px;
+  color: var(--amber); background: color-mix(in srgb, var(--warning) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+  cursor: default; line-height: 1.5; white-space: nowrap;
+}
+.panel {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-radius: 8px; background: color-mix(in srgb, var(--warning) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warning) 22%, transparent); margin: 4px 0 10px;
+}
+.panelIcon { flex-shrink: 0; font-size: 13px; }
+.panelText { flex: 1; font-family: var(--font-ui); font-size: 12px; color: var(--text-secondary); line-height: 1.5; }

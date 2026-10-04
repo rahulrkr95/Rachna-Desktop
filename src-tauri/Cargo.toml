@@ -1,0 +1,91 @@
+[package]
+name    = "rachna-ide"
+version = "1.0.0"
+edition = "2021"
+build = "build.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri               = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-shell  = "2"
+tauri-plugin-deep-link = "2"
+serde               = { version = "1", features = ["derive"] }
+serde_json          = "1"
+rusqlite            = { version = "*", features = ["bundled"] }
+sqlite-vec          = "0.1.9"
+portable-pty        = "0.8"
+keyring             = { version = "3", features = ["apple-native", "windows-native", "sync-secret-service"] }
+# "net" is for the one-shot loopback listener in auth.rs (Google sign-in redirect).
+tokio               = { version = "1", features = ["sync", "time", "process", "io-util", "macros", "rt", "net"] }
+# Official MCP Rust SDK (src-tauri/src/mcp.rs) — owns JSON-RPC framing,
+# transport, the initialize handshake, request ids, and cancellation for
+# both local (stdio) and remote (Streamable HTTP) MCP servers.
+rmcp                = { version = "0.14", features = ["client", "transport-child-process", "transport-streamable-http-client-reqwest"] }
+reqwest             = { version = "0.12", features = ["json", "stream"] }
+futures-util        = "0.3"
+notify              = { version = "6", features = ["serde"] }
+notify-debouncer-mini = "0.4"
+tauri-plugin-fs = "2.5.1"
+tauri-plugin-os = "2.3.2"
+tauri-plugin-process = "2.3.1"
+tauri-plugin-updater = "2.10.1"
+which = "8"
+# Desktop Task tool (services/agent/tools/desktopTaskTool.ts): open files/URLs
+# with the OS default handler, launch/list/kill processes, OS notifications,
+# and clipboard read/write. See src-tauri/src/desktop_task.rs.
+open = "5"
+sysinfo = "0.32"
+tauri-plugin-notification = "2"
+tauri-plugin-clipboard-manager = "2"
+# resolve_app (desktop_task.rs): walk Start Menu shortcut folders to find an
+# installed application by name.
+walkdir = "2"
+# take_screenshot (desktop_task.rs): cross-platform screen capture for the
+# agent's take_screenshot tool (services/agent/tools/screenshotTool.ts).
+xcap = "0.8"
+# Backs xcap's captured-image type (RgbaImage) so we can name it explicitly
+# and call .save()/.width()/.height() on it.
+image = "0.25"
+# mouse_click / press_key (input_control.rs): cross-platform mouse/keyboard
+# input simulation for the agent's mouse_click and keyboard_key_press tools.
+enigo = "0.6"
+
+# scan_installed_apps (app_registry.rs) shells out to `powershell
+# Get-StartApps` and parses its JSON output with the existing serde_json
+# dependency above — no new crate needed for that part.
+# resolve_app (desktop_task.rs): read the Windows "App Paths" registry key.
+# window_control.rs (focus_app/close_app): enumerate windows and post
+# foreground/close requests via the Win32 API.
+# Windows-only — must not be a normal [dependencies] entry or the build
+# breaks on macOS/Linux.
+[target.'cfg(windows)'.dependencies]
+winreg = "0.52"
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    # window_registry.rs (list_visible_windows): DwmGetWindowAttribute /
+    # DWMWA_CLOAKED, to filter out DWM-cloaked UWP/packaged placeholder
+    # windows that otherwise pass IsWindowVisible.
+    "Win32_Graphics_Dwm",
+] }
+# show_action_notification (action_notifications.rs): real Accept/Reject
+# buttons on the OS notification for permission prompts. Already pulled in
+# transitively by tauri-plugin-notification's notify-rust dependency on
+# Windows — declared directly here so we can use its add_button()/
+# on_activated() API, which the plugin itself only exposes on mobile.
+tauri-winrt-notification = "0.7"
+
+[dev-dependencies]
+# Used by src/db.rs's #[cfg(test)] suite to create isolated temp
+# app_data_dir trees for migration / DB-isolation tests.
+tempfile = "3"
+
+[profile.release]
+opt-level     = "z"
+lto           = true
+codegen-units = 1
+panic         = "abort"
+strip         = true

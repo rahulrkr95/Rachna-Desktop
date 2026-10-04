@@ -1,0 +1,162 @@
+/* components/InputActionOverlay.module.css
+ *
+ * Purely cosmetic — see components/InputActionOverlay.tsx and
+ * store/useInputActionOverlayStore.ts for what drives this.
+ */
+
+.root {
+  position: fixed;
+  inset: 0;
+  /* Above every modal in the app (highest existing z-index elsewhere is
+     9999 on GraphDialog) so this always renders on top, in every view. */
+  z-index: 999999;
+  pointer-events: none;
+}
+
+/* ── full-viewport input capture, shown only while `blocking` is true ── */
+.captureLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: auto;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* ── click ring ── */
+.clickRing {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  margin-top: -22px;
+  border-radius: 50%;
+  border: 3px solid #4da3ff;
+  box-shadow: 0 0 12px rgba(77, 163, 255, 0.8);
+  animation: ringPulse 600ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.clickDot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: #4da3ff;
+  box-shadow: 0 0 8px rgba(77, 163, 255, 0.9);
+  animation: dotFade 600ms ease-out forwards;
+}
+
+@keyframes ringPulse {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+    border-width: 5px;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes dotFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+/* ── drag path svg ── */
+.dragSvg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dragPath {
+  fill: none;
+  stroke: #ffb454;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(255, 180, 84, 0.7));
+}
+
+.dragHead {
+  fill: #ffb454;
+  filter: drop-shadow(0 0 6px rgba(255, 180, 84, 0.9));
+}
+
+/* ── keystroke top bar ── */
+.keyBar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: rgba(20, 20, 26, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  color: #e8e8ee;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  max-width: 70vw;
+  animation: barIn 180ms ease-out;
+}
+
+.keyBarLabel {
+  color: #8a8aa0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.keyBarValue {
+  color: #ffffff;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.keyBarFadeOut {
+  animation: barOut 220ms ease-in forwards;
+}
+
+@keyframes barIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes barOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+}

@@ -1,0 +1,128 @@
+/* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK THEME  (default)
+   All component styles consume these tokens — never hardcode hex.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Core backgrounds (Neutral Slate palette) ──────────────── */
+  --bg-base:      #222222;   /* Deep Slate */
+  --bg-panel:     #2b2b2b;   /* Slate */
+  --bg-surface:   #333333;   /* Light Slate */
+  --bg-sidebar:   #202327;   /* Darker Slate */
+  --bg-hover:     #3d3d3d;   /* Neutral hover grey */
+  --bg-active:    #797979;   /* Selection Blue */
+
+  /* ── Borders ──────────────────────────────────────────────── */
+  --border:        #34383D;   /* Slate */
+  --border-bright: #4B5563;   /* Light Slate / grey */
+
+  /* ── Text ─────────────────────────────────────────────────── */
+  --text-primary:   #E4E7EC;
+  --text-secondary: #94A3B8;
+  --text-muted:     #64748B;
+  --text-code:      #E4E7EC;
+
+  /* ── Accent / interactive — the ONLY colour in dark mode ──── */
+  --accent:        #2563EB;   /* Blue */
+  --accent-glow:   rgba(46, 133, 249, 0.15);
+  --hover:         #1D6FE0;   /* Darker blue, pairs with --accent in gradients */
+
+  /* Text color to use on top of --bg-hover / --bg-active / --accent
+     backgrounds. In dark mode --bg-active/--accent are now a saturated blue,
+     so white reads best on top of them; --bg-hover stays neutral grey where
+     --text-primary (light) already reads fine. Light mode overrides this to
+     white below, since its --bg-hover / --bg-active are a bright blue that
+     dark --text-primary is illegible on. */
+  --text-on-hover: #FFFFFF;
+
+  /* ── Semantic colours ─────────────────────────────────────── */
+  --success:  #34D399;
+  --warning:  #FBBF24;
+  --error:    #F87171;
+
+  /* ── Legacy aliases (consumed by component CSS) ──────────── */
+  --green:    #34D399;
+  --cyan:     #2E85F9;
+  --purple:   #A78BFA;
+  --amber:    #FBBF24;
+  --red:      #F87171;
+
+  /* ── Layout ───────────────────────────────────────────────── */
+  --sidebar-left-w:  220px;
+  --sidebar-right-w: 280px;
+  --header-h:  38px;
+  --tab-h:     36px;
+  --status-h:  24px;
+
+  /* ── Fonts ────────────────────────────────────────────────── */
+  --font-ui:   'Manrope', 'Segoe UI', sans-serif;
+  --font-code: 'JetBrains Mono', 'Cascadia Code', monospace;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT THEME  — override only what changes
+   ═══════════════════════════════════════════════════════════════ */
+[data-theme='light'] {
+  /* ── Core backgrounds ─────────────────────────────────────── */
+  --bg-base:      #FFFFFF;
+  --bg-panel:     #F7F9FC;
+  --bg-surface:   #EDF2F7;
+  --bg-sidebar:   #D6E0EA;
+  --bg-hover:     #2563EB;
+  --bg-active:    #2563EB;
+
+  /* ── Borders ──────────────────────────────────────────────── */
+  --border:        #D6E0EA;
+  --border-bright: #00FFFF;
+
+  /* ── Text ─────────────────────────────────────────────────── */
+  --text-primary:   #0F172A;
+  --text-secondary: #64748B;
+  --text-muted:     #64748B;
+  --text-code:      #0F172A;
+
+  /* ── Accent / interactive ─────────────────────────────────── */
+  --accent:       #2563EB;
+  --accent-glow:  rgba(37, 99, 235, 0.12);
+  --hover:        #1D4ED8;
+  --text-on-hover: #FFFFFF;
+
+  /* ── Semantic colours ─────────────────────────────────────── */
+  --success:  #10B981;
+  --warning:  #D97706;
+  --error:    #DC2626;
+
+  /* ── Legacy aliases ───────────────────────────────────────── */
+  --green:    #10B981;
+  --cyan:     #0891B2;
+  --purple:   #2563EB;
+  --amber:    #D97706;
+  --red:      #DC2626;
+  --black:    #111111;
+}
+
+/* ── Base document ──────────────────────────────────────────── */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* ── Global scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: var(--border-bright); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

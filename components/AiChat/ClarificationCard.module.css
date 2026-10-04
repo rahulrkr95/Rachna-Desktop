@@ -1,0 +1,139 @@
+/* components/AiChat/ClarificationCard.module.css */
+
+.card {
+  margin-top: 10px;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 10px;
+  background: rgba(99, 102, 241, 0.06);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cardResolved {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section + .section {
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--text-primary, #e5e7eb);
+}
+
+.subtitle {
+  color: var(--text-secondary, #9ca3af);
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.correctedText {
+  color: var(--text-primary, #e5e7eb);
+  font-style: italic;
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.questionItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.questionText {
+  color: var(--text-primary, #e5e7eb);
+}
+
+.answerInput {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(15, 23, 42, 0.3);
+  color: var(--text-primary, #e5e7eb);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12.5px;
+  font-family: inherit;
+}
+
+.answerInput:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.6);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.primaryBtn, .secondaryBtn {
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.primaryBtn {
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--text-primary, #e5e7eb);
+}
+
+.primaryBtn:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.secondaryBtn {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: transparent;
+  color: var(--text-secondary, #9ca3af);
+}
+
+.secondaryBtn:hover:not(:disabled) {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.primaryBtn:disabled, .secondaryBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

@@ -1,0 +1,25 @@
+{
+  "id": "filesystem",
+  "name": "Filesystem",
+  "description": "Browse and read local files in the open project via the official filesystem MCP server. Runs locally — nothing leaves your machine.",
+  "version": "1.0.0",
+  "icon": "filesystem",
+  "vendor": "Model Context Protocol",
+  "auth": {
+    "type": "none"
+  },
+  "transport": {
+    "kind": "mcp-stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "permissions": [
+    "Read files in the open project",
+    "List project directories"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Rachna AI Studio",
+  "version": "1.0.0",
+  "identifier": "com.rachnaai.ide",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build && cd lib/browser-tool && npm install && npx playwright install chromium --with-deps",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Rachna AI Studio",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 800,
+        "minHeight": 600,
+        "transparent": true,
+        "resizable": true,
+        "fullscreen": false,
+        "maximized": true,
+        "decorations": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: asset: https:; font-src 'self' data:; connect-src 'self' ipc: asset: https://api.anthropic.com https://api.openai.com https://generativelanguage.googleapis.com https://api.deepseek.com https://openrouter.ai https://zenmux.ai https://api.github.com https://registry.npmjs.org https://api.stackexchange.com https://html.duckduckgo.com https://www.rachna-ai.in http://localhost:* http://127.0.0.1:*; worker-src 'self' blob:; media-src 'self' blob: data:; object-src 'none'; frame-ancestors 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "resources": {
+      "../lib/repo-scanner/dist": "lib/repo-scanner/dist",
+      "../lib/repo-scanner/node_modules": "lib/repo-scanner/node_modules",
+      "../lib/repo-scanner/package.json": "lib/repo-scanner/package.json",
+      "../lib/browser-tool": "lib/browser-tool"
+    }
+  },
+  "plugins": {
+    "deep-link": {
+      "mobile": [],
+      "desktop": {
+        "schemes": ["rachna-ide"]
+      }
+    },
+    "dialog": null,
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ2NjQyMzBBRjMyMDE2NDAKUldSQUZpRHpDaU5rUmo5TGs0ZGxmYjlEdTRVdE5hNjViYSt2alJFM1RkWVdic1c2aS9TVmI1YmQK",
+      "endpoints": [
+        "https://mirage-be-1.onrender.com/api/app/update/{{target}}/{{current_version}}"
+      ]
+    }
+  }
+}
