@@ -45,8 +45,8 @@ cargo install tauri-cli
 `lib/repo-scanner/` is a regular folder inside this repo (own `package.json`/`tsconfig.json`, built independently — see below for why). Nothing special is needed to clone it, it comes down with the rest of the repo:
 
 ```powershell
-git clone git@github.com:Rachna-AI-Studio/rachna-ide.git
-cd rachna-ide
+git clone https://github.com/rahulrkr95/Rachna-Desktop.git
+cd Rachna-Desktop
 ```
 
 ---
@@ -954,5 +954,8 @@ tauri.conf.json
 ```
 
 to match.
-#   R a c h n a - D e s k t o p  
- 
+
+## License
+
+Rachna Desktop is open source under the [MIT License](LICENSE).
+Third-party dependencies retain their respective licenses.
